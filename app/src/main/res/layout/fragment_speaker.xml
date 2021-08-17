@@ -12,4 +12,60 @@
         android:textAlignment="center"
         android:layout_gravity="center" />
 
+    <Button
+        android:id="@+id/btnSetting_Speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Setting"
+        android:layout_gravity="right"
+        android:layout_marginTop="15dp"
+        android:drawableRight="@drawable/icon_setting" />
+
+    <TextView
+        android:id="@+id/textViewInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Info"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/textViewTime_Speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current time : "
+        android:textSize="20dp"
+        android:layout_margin="20dp" />
+
+    <TextView
+        android:id="@+id/TextViewNum_Speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone number : "
+        android:textSize="20dp"
+        android:layout_margin="20dp" />
+
+    <TextView
+        android:id="@+id/TextViewCity_Speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="City : "
+        android:textSize="20dp"
+        android:layout_margin="20dp" />
+
+    <Button
+        android:id="@+id/BtnCheckIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="60dp"
+        android:layout_gravity="center"
+        android:paddingHorizontal="30dp"
+        android:text="CHECK IN"
+        android:textSize="25dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/btn_background" />
+
 </LinearLayout>

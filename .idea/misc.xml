@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/82102/StudioProjects/soundless-check-in/app/src/main/res/drawable/btn_background.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/82102/StudioProjects/soundless-check-in/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/82102/StudioProjects/soundless-check-in/app/src/main/res/drawable/icon_setting.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/82102/StudioProjects/soundless-check-in/app/src/main/res/layout/fragment_listener.xml" value="0.264" />
+        <entry key="..\:/Users/82102/StudioProjects/soundless-check-in/app/src/main/res/layout/fragment_speaker.xml" value="0.25364583333333335" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
