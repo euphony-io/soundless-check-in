@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Listener"
+        android:textAlignment="center"
+        android:layout_gravity="center" />
+
     <Button
         android:id="@+id/btnSetting_Listener"
         android:layout_width="wrap_content"
@@ -43,7 +50,7 @@
         android:layout_margin="20dp" />
 
     <TextView
-        android:id="@+id/textViewCity_Listener"
+        android:id="@+id/TextViewCity_Listener"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="City : "
