@@ -16,8 +16,9 @@
         android:id="@+id/btnSetting_Speaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Setting"
+        android:background="@null"
         android:layout_gravity="right"
+        android:paddingRight="20dp"
         android:layout_marginTop="15dp"
         android:drawableRight="@drawable/icon_setting" />
 
@@ -41,7 +42,7 @@
         android:layout_margin="20dp" />
 
     <TextView
-        android:id="@+id/TextViewNum_Speaker"
+        android:id="@+id/textViewNum_Speaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phone number : "
@@ -49,7 +50,7 @@
         android:layout_margin="20dp" />
 
     <TextView
-        android:id="@+id/TextViewCity_Speaker"
+        android:id="@+id/textViewCity_Speaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="City : "
@@ -57,7 +58,7 @@
         android:layout_margin="20dp" />
 
     <Button
-        android:id="@+id/BtnCheckIn"
+        android:id="@+id/btnCheckIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="60dp"

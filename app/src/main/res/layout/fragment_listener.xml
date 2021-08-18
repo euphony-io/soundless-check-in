@@ -15,13 +15,14 @@
         android:id="@+id/btnSetting_Listener"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Setting"
+        android:background="@null"
         android:layout_gravity="right"
+        android:paddingRight="20dp"
         android:layout_marginTop="15dp"
         android:drawableRight="@drawable/icon_setting" />
 
     <Button
-        android:id="@+id/BtnGetInfo"
+        android:id="@+id/btnGetInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
@@ -49,7 +50,7 @@
         android:layout_margin="20dp" />
 
     <TextView
-        android:id="@+id/TextViewCity_Listener"
+        android:id="@+id/textViewCity_Listener"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="City : "
