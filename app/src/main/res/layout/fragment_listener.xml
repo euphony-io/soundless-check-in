@@ -50,7 +50,7 @@
         android:layout_margin="20dp" />
 
     <TextView
-        android:id="@+id/TextViewCity_Listener"
+        android:id="@+id/textViewCity_Listener"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="City : "
