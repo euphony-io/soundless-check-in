@@ -5,13 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Speaker"
-        android:textAlignment="center"
-        android:layout_gravity="center" />
-
     <Button
         android:id="@+id/btnSetting_Speaker"
         android:layout_width="wrap_content"
