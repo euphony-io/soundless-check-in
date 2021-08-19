@@ -4,11 +4,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:id="@+id/btnSetting_Listener"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Listener"
-        android:textAlignment="center"
-        android:layout_gravity="center" />
+        android:background="@null"
+        android:layout_gravity="right"
+        android:paddingRight="20dp"
+        android:layout_marginTop="15dp"
+        android:drawableRight="@drawable/icon_setting" />
+
+    <Button
+        android:id="@+id/btnGetInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:layout_gravity="center"
+        android:paddingHorizontal="30dp"
+        android:text="GET INFO !"
+        android:textSize="25dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/btn_background" />
+
+    <TextView
+        android:id="@+id/textViewTime_Listener"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time : "
+        android:textSize="20dp"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:id="@+id/textViewNum_Listener"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone number : "
+        android:textSize="20dp"
+        android:layout_margin="20dp" />
+
+    <TextView
+        android:id="@+id/textViewCity_Listener"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="City : "
+        android:textSize="20dp"
+        android:layout_margin="20dp" />
 
 </LinearLayout>
