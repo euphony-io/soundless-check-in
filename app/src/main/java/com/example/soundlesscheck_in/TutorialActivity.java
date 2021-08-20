@@ -3,6 +3,7 @@ package com.example.soundlesscheck_in;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,8 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         mPhoneNumber = findViewById(R.id.phonenumberEditText);
         mLivingCity = findViewById(R.id.citynameEditText);
         mGetInfoBtn = findViewById(R.id.btnGetFirstInfo);
+
+        mPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         mGetInfoBtn.setOnClickListener(this);
     }
 
