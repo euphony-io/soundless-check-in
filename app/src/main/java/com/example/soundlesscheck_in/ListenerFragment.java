@@ -9,7 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ListenerFragment extends Fragment {
+
+    // Variables related to getting current time
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    Date mDate;
+    long mNow;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -19,4 +27,10 @@ public class ListenerFragment extends Fragment {
 
     }
 
+    // return current time
+    private String getTime() {
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
 }
