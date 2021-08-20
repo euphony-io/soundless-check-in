@@ -1,5 +1,6 @@
 package com.example.soundlesscheck_in;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,46 +19,57 @@ import java.util.Date;
 
 import euphony.lib.transmitter.EuTxManager;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SpeakerFragment extends Fragment implements View.OnClickListener {
 
-    boolean speak = false;
+    private boolean speak = false;
     // Variables of UI component
-    TextView tvNumber;
-    TextView tvCity;
-    Button btnCheckIn;
+    private TextView tvNumber;
+    private TextView tvCity;
+    private Button btnCheckIn;
     //
-    String data;        // data that gonna be sent.
+    private SharedPreferences prefs;
+    private String data;        // data that gonna be sent.
+    private String phoneNumber;
+    private String livingCity;
     // Euphony Library
-    EuTxManager mTxManager = new EuTxManager();
+    private EuTxManager mTxManager = new EuTxManager();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_speaker, container,false);
+        setUI(v);
+        return v;
+    }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
+
+    private void setUI(View v) {
         tvNumber = v.findViewById(R.id.textViewNumEdit_Speaker);
         tvCity = v.findViewById(R.id.textViewCityEdit_Speaker);
         btnCheckIn = v.findViewById(R.id.btnCheckIn);
+        btnCheckIn.setOnClickListener(this);
+    }
+
+    private void getData() {
+        prefs = this.getActivity().getSharedPreferences("Pref", MODE_PRIVATE);
 
         // necessary information
-        String phoneNumber;
-        String livingCity;
-
-        // it will be updated after add tutorial function.
-        phoneNumber = "010-1234-1234";
-        livingCity = "Gwangjin-gu, Seoul";
+        phoneNumber = prefs.getString("phone", "No Data");
+        livingCity = prefs.getString("city", "No Data");
 
         data = phoneNumber+"/"+livingCity;
         // Data format : 010-xxxx-xxxx/City(English)
         // ex) 010-1234-1234/Seoul
 
-        //
-        btnCheckIn.setOnClickListener(this);
         tvNumber.setText(phoneNumber);
         tvCity.setText(livingCity);
-
-        return v;
     }
-
 
     @Override
     public void onClick(View v) {

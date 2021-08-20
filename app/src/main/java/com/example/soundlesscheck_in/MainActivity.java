@@ -3,6 +3,8 @@ package com.example.soundlesscheck_in;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -11,12 +13,21 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        prefs = getSharedPreferences("Pref", MODE_PRIVATE);
+        checkFirstRun();
+
+        setUI();
+
+    }
+
+    protected void setUI() {
         tabLayout = findViewById(R.id.mainTab);
         viewPager = findViewById(R.id.mainViewPager);
 
@@ -40,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
+    }
 
+    public void checkFirstRun() {
+        boolean isFirstRun = prefs.getBoolean("isFirstRun", true);
+
+        if(isFirstRun) {
+            prefs.edit().putBoolean("isFirstRun", false).apply();;
+
+            Intent tutorialIntent = new Intent(MainActivity.this, TutorialActivity.class);
+            startActivity(tutorialIntent);
+        }
     }
 }

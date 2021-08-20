@@ -51,7 +51,7 @@
         android:hint="Gangnam-gu, Seoul" />
 
     <Button
-        android:id="@+id/btnSetting_Listener"
+        android:id="@+id/btnGetFirstInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
