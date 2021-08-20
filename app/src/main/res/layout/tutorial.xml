@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/phonenumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="20dp"
+        android:paddingHorizontal="3dp"
+        android:text="Enter Your Phone Number : "
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/phonenumberEditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:hint="010-1234-5678"
+        android:inputType="phone"/>
+
+    <TextView
+        android:id="@+id/citynameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phonenumberEditText"
+        android:layout_gravity="left"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="20dp"
+        android:paddingHorizontal="3dp"
+        android:text="Enter the City where you live : "
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/citynameEditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:inputType="text"
+        android:hint="Gangnam-gu, Seoul" />
+
+    <Button
+        android:id="@+id/btnSetting_Listener"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="OK"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+        android:background="@drawable/btn_background" />
+
+
+</LinearLayout>
