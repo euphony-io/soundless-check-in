@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class ListenerFragment extends Fragment{
+public class ListenerFragment extends Fragment implements View.OnClickListener {
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.KOREA);
     Date mDate;
     long mNow;
@@ -41,6 +41,9 @@ public class ListenerFragment extends Fragment{
         mTextTime = v.findViewById(R.id.textViewTime_Listener);
         mTextPhoneNumber = v.findViewById(R.id.textViewNum_Listener);
         mTextViewCity = v.findViewById(R.id.textViewCity_Listener);
+
+        mBtnSetting.setOnClickListener(this);
+        mBtnGetInfo.setOnClickListener(this);
     }
 
     // return current time
@@ -48,5 +51,15 @@ public class ListenerFragment extends Fragment{
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
         return mFormat.format(mDate);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.btnGetInfo){
+            
+        }
+        if(v.getId() == R.id.btnSetting_Listener){
+
+        }
     }
 }
