@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,13 +70,24 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.btnGetInfo) {
             if (checkRecordAudioPermission()) {
-
+                controlReceiver();
             } else {
                 requestRecorderPermission();
             }
         }
         if (v.getId() == R.id.btnSetting_Listener) {
 
+        }
+    }
+
+    private void controlReceiver(){
+        if(isRunning){
+            mReceiver.finish();
+            isRunning = false;
+        }else{
+            mReceiver.listen();
+            isRunning = true;
+            Toast.makeText(requireActivity(), "Getting user information...", Toast.LENGTH_LONG).show();
         }
     }
 
