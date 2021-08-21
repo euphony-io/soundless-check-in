@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import euphony.lib.receiver.EuRxManager;
+
 public class ListenerFragment extends Fragment implements View.OnClickListener {
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.KOREA);
     Date mDate;
@@ -31,6 +33,9 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     TextView mTextViewCity;
 
     private final int PERMISSION_REQUEST_RECORD_AUDIO = 2021;
+
+    EuRxManager mReceiver = new EuRxManager();
+    private boolean isRunning = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_listener, container, false);
@@ -53,13 +58,18 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         mBtnGetInfo.setOnClickListener(this);
 
         requestRecorderPermission();
+
+        mReceiver.setAcousticSensor(letters -> {
+//            setUserInformation(letters);
+            isRunning = false;
+        });
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnGetInfo) {
             if (checkRecordAudioPermission()) {
-                
+
             } else {
                 requestRecorderPermission();
             }
