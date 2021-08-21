@@ -61,7 +61,7 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         requestRecorderPermission();
 
         mReceiver.setAcousticSensor(letters -> {
-//            setUserInformation(letters);
+            setUserInformation(letters);
             isRunning = false;
         });
     }
@@ -77,6 +77,19 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         }
         if (v.getId() == R.id.btnSetting_Listener) {
 
+        }
+    }
+
+    private void setUserInformation(String data){
+        String[] userInfo = data.split("/");
+
+        if(userInfo.length == 2){
+            mTextTime.setText(String.format(getString(R.string.check_in_time), getTime()));
+            mTextPhoneNumber.setText(String.format(getString(R.string.customer_phone_number), userInfo[0]));
+            mTextViewCity.setText(String.format(getString(R.string.customer_city), userInfo[1]));
+            Toast.makeText(requireActivity(), "Check-in is complete!", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(requireActivity(), "Failed to get user information. : "+data, Toast.LENGTH_LONG).show();
         }
     }
 
