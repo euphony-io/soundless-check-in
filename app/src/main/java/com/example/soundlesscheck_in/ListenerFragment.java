@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,8 @@ import androidx.fragment.app.Fragment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import euphony.lib.receiver.EuRxManager;
 
 public class ListenerFragment extends Fragment implements View.OnClickListener {
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.KOREA);
@@ -31,6 +34,9 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     TextView mTextViewCity;
 
     private final int PERMISSION_REQUEST_RECORD_AUDIO = 2021;
+
+    EuRxManager mReceiver = new EuRxManager();
+    private boolean isRunning = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_listener, container, false);
@@ -53,19 +59,48 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         mBtnGetInfo.setOnClickListener(this);
 
         requestRecorderPermission();
+
+        mReceiver.setAcousticSensor(letters -> {
+            setUserInformation(letters);
+            isRunning = false;
+        });
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnGetInfo) {
             if (checkRecordAudioPermission()) {
-                
+                controlReceiver();
             } else {
                 requestRecorderPermission();
             }
         }
         if (v.getId() == R.id.btnSetting_Listener) {
 
+        }
+    }
+
+    private void setUserInformation(String data){
+        String[] userInfo = data.split("/");
+
+        if(userInfo.length == 2){
+            mTextTime.setText(String.format(getString(R.string.check_in_time), getTime()));
+            mTextPhoneNumber.setText(String.format(getString(R.string.customer_phone_number), userInfo[0]));
+            mTextViewCity.setText(String.format(getString(R.string.customer_city), userInfo[1]));
+            Toast.makeText(requireActivity(), "Check-in is complete!", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(requireActivity(), "Failed to get user information. : "+data, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void controlReceiver(){
+        if(isRunning){
+            mReceiver.finish();
+            isRunning = false;
+        }else{
+            mReceiver.listen();
+            isRunning = true;
+            Toast.makeText(requireActivity(), "Getting user information...", Toast.LENGTH_LONG).show();
         }
     }
 
