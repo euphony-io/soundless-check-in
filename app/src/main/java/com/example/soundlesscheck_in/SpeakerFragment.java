@@ -7,19 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKeys;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 import euphony.lib.transmitter.EuTxManager;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class SpeakerFragment extends Fragment implements View.OnClickListener {
 
@@ -57,11 +55,9 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getData() {
-        prefs = this.getActivity().getSharedPreferences("Pref", MODE_PRIVATE);
-
         // necessary information
-        phoneNumber = prefs.getString("phone", "No Data");
-        livingCity = prefs.getString("city", "No Data");
+        phoneNumber = EncryptedSPManager.getString(this.getActivity(), "phone");
+        livingCity = EncryptedSPManager.getString(this.getActivity(), "city");
 
         data = phoneNumber+"/"+livingCity;
         // Data format : 010-xxxx-xxxx/City(English)
