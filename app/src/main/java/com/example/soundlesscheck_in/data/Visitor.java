@@ -6,11 +6,6 @@ public class Visitor {
     private String place; // place of visit
     private String date; // visit date
 
-    public Visitor(String residence, String place) {
-        this.residence = residence;
-        this.place = place;
-    }
-
     public Visitor(String phoneNumber, String residence, String place, String date) {
         this.phoneNumber = phoneNumber;
         this.residence = residence;
