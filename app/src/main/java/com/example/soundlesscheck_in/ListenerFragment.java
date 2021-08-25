@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,11 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import com.example.soundlesscheck_in.data.Store;
+import com.example.soundlesscheck_in.data.Visitor;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,6 +49,10 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
 
     EuRxManager mReceiver = new EuRxManager();
     private boolean isRunning = false;
+
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference visitorRef = db.collection("visitor");
+    private final CollectionReference storeRef = db.collection("store");
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_listener, container, false);
@@ -95,7 +105,11 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.btnGetInfo) {
             if (checkRecordAudioPermission()) {
-                controlReceiver();
+                if(EncryptedSPManager.getString(getContext(), "licenseNumber").equals(EncryptedSPManager.DEFAULT_VALUE_STRING)){
+                    Toast.makeText(requireActivity(), "Please check-in after registering the store information.", Toast.LENGTH_LONG).show();
+                }else{
+                    controlReceiver();
+                }
             } else {
                 requestRecorderPermission();
             }
@@ -110,13 +124,44 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         String[] userInfo = data.split("/");
 
         if(userInfo.length == 2){
-            mTextTime.setText(String.format(getString(R.string.check_in_time), getTime()));
+            String currentTime = getTime();
+
+            Visitor visitor = new Visitor(userInfo[0], userInfo[1], "", currentTime);
+            Store store = new Store(EncryptedSPManager.getString(getContext(), "licenseNumber"), visitor);
+
+            updateVisitorInformation(visitor);
+            updateStoreInformation(store);
+
+            mTextTime.setText(String.format(getString(R.string.check_in_time), currentTime));
             mTextPhoneNumber.setText(String.format(getString(R.string.customer_phone_number), userInfo[0]));
             mTextViewCity.setText(String.format(getString(R.string.customer_city), userInfo[1]));
+
             Toast.makeText(requireActivity(), "Check-in is complete!", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(requireActivity(), "Failed to get user information. : "+data, Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void updateVisitorInformation(Visitor visitor){
+        visitorRef.document(visitor.getPhoneNumber())
+                .set(visitor)
+                .addOnSuccessListener( unused ->
+                        Log.d("ListenerFragment", "Success to save visitor information.")
+                )
+                .addOnFailureListener( e ->
+                        Log.w("ListenerFragment", "Failure to save visitor information :" + e.getMessage())
+                );
+    }
+
+    private void updateStoreInformation(Store store){
+        storeRef.document(store.getLicenseNumber())
+                .set(store)
+                .addOnSuccessListener( unused ->
+                        Log.d("ListenerFragment", "Success to save store information.")
+                )
+                .addOnFailureListener( e ->
+                        Log.w("ListenerFragment", "Failure to save store information :" + e.getMessage())
+                );
     }
 
     private void controlReceiver(){

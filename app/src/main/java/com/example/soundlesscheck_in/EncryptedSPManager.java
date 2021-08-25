@@ -14,7 +14,7 @@ public class EncryptedSPManager {
     private static String masterKeyAlias;
     private static SharedPreferences prefs;
 
-    private static final String  DEFAULT_VALUE_STRING = "No Data";
+    public static final String DEFAULT_VALUE_STRING = "No Data";
 
     private static SharedPreferences getPrefs(Context context) {
         try {
