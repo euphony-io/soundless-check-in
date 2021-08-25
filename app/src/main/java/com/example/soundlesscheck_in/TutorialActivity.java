@@ -1,6 +1,5 @@
 package com.example.soundlesscheck_in;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -23,7 +22,6 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.tutorial);
 
         setUI();
-
     }
 
     protected void setUI() {
@@ -37,11 +35,10 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        prefs = getSharedPreferences("Pref", MODE_PRIVATE);
-
-        prefs.edit().putString("phone", mPhoneNumber.getText().toString()).apply();
-        prefs.edit().putString("city", mLivingCity.getText().toString()).apply();
+        EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
+        EncryptedSPManager.setString(this, "city", mLivingCity.getText().toString());
 
         finish();
     }
+
 }
