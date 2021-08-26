@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,12 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.tutorial);
 
         setUI();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!isFirst) updateEditTextUI();
     }
 
     protected void setUI() {
@@ -61,6 +68,11 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
 
         mCancelBtn.setOnClickListener(this);
         isBtnMade = true;
+    }
+
+    protected void updateEditTextUI() {
+        mPhoneNumber.setText(EncryptedSPManager.getString(this,"phone"));
+        mLivingCity.setText(EncryptedSPManager.getString(this, "city"));
     }
 
     @Override
