@@ -86,9 +86,9 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.btnSetting_Speaker :
-                Intent tutorialIntent = new Intent(this.getActivity().getApplicationContext(), TutorialActivity.class);
+                Intent tutorialIntent = new Intent(getActivity(), TutorialActivity.class);
                 tutorialIntent.putExtra("boolean_checkFirst", false);
-                getActivity().startActivity(tutorialIntent);
+                startActivity(tutorialIntent);
                 break;
             default:
                 break;
