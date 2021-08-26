@@ -29,7 +29,6 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     private Button btnCheckIn;
     private Button btnSetting;
     //
-    private SharedPreferences prefs;
     private String data;        // data that gonna be sent.
     private String phoneNumber;
     private String livingCity;
@@ -88,6 +87,7 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btnSetting_Speaker :
                 Intent tutorialIntent = new Intent(this.getActivity().getApplicationContext(), TutorialActivity.class);
+                tutorialIntent.putExtra("boolean_checkFirst", false);
                 getActivity().startActivity(tutorialIntent);
                 break;
             default:

@@ -48,7 +48,8 @@
         android:hint="Gangnam-gu, Seoul"
         android:inputType="textCapSentences" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/layoutTutorialButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -58,22 +59,11 @@
             android:id="@+id/btnGetFirstInfo"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_marginRight="15dp"
             android:background="@drawable/btn_background"
             android:text="OK"
             android:textColor="#FFFFFF"
             android:textSize="25dp" />
-
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/btn_background"
-            android:text="CANCEL"
-            android:textColor="#FFFFFF"
-            android:textSize="25dp" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

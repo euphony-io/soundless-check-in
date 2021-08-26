@@ -1,16 +1,25 @@
 package com.example.soundlesscheck_in;
 
-import android.content.SharedPreferences;
+import android.app.ActionBar;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TutorialActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int btnCancel = 11111;
+    private boolean isFirst;
+    private boolean isBtnMade = false;
+
+    private LinearLayout mLayout;
     private EditText mPhoneNumber;
     private EditText mLivingCity;
     private Button mGetInfoBtn;
@@ -25,14 +34,33 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     }
 
     protected void setUI() {
+        mLayout = findViewById(R.id.layoutTutorialButtons);
         mPhoneNumber = findViewById(R.id.phonenumberEditText);
         mLivingCity = findViewById(R.id.citynameEditText);
         mGetInfoBtn = findViewById(R.id.btnGetFirstInfo);
-        mCancelBtn = findViewById(R.id.btnCancel);
 
         mPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         mGetInfoBtn.setOnClickListener(this);
+
+        isFirst = getIntent().getBooleanExtra("boolean_checkFirst", false);
+        if(!isFirst&&!isBtnMade) addNewButton();
+    }
+
+    protected void addNewButton() {
+        mCancelBtn = new Button(this);
+        LinearLayout.LayoutParams pm = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        pm.gravity = Gravity.RIGHT;
+        mCancelBtn.setId(btnCancel);
+        mCancelBtn.setText("CANCEL");
+        mCancelBtn.setTextColor(Color.parseColor("#FFFFFF"));   //white
+        mCancelBtn.setTextSize(25);
+        mCancelBtn.setBackgroundResource(R.drawable.btn_background);
+        mCancelBtn.setLayoutParams(pm);
+
+        mLayout.addView(mCancelBtn);
+
         mCancelBtn.setOnClickListener(this);
+        isBtnMade = true;
     }
 
     @Override
@@ -41,10 +69,9 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btnGetFirstInfo:
                 EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
                 EncryptedSPManager.setString(this, "city", mLivingCity.getText().toString());
-
                 finish();
                 break;
-            case R.id.btnCancel:
+            case btnCancel:
                 finish();
                 break;
             default:
