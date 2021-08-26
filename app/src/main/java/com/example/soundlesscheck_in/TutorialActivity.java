@@ -14,7 +14,7 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     private EditText mPhoneNumber;
     private EditText mLivingCity;
     private Button mGetInfoBtn;
-    private SharedPreferences prefs;
+    private Button mCancelBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +28,28 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         mPhoneNumber = findViewById(R.id.phonenumberEditText);
         mLivingCity = findViewById(R.id.citynameEditText);
         mGetInfoBtn = findViewById(R.id.btnGetFirstInfo);
+        mCancelBtn = findViewById(R.id.btnCancel);
 
         mPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         mGetInfoBtn.setOnClickListener(this);
+        mCancelBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
-        EncryptedSPManager.setString(this, "city", mLivingCity.getText().toString());
+        switch (v.getId()) {
+            case R.id.btnGetFirstInfo:
+                EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
+                EncryptedSPManager.setString(this, "city", mLivingCity.getText().toString());
 
-        finish();
+                finish();
+                break;
+            case R.id.btnCancel:
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 
 }
