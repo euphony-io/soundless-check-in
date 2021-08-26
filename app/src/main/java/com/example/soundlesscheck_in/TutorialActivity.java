@@ -1,6 +1,5 @@
 package com.example.soundlesscheck_in;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +29,12 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.tutorial);
 
         setUI();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!isFirst) updateEditTextUI();
     }
 
     protected void setUI() {
@@ -61,6 +65,11 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
 
         mCancelBtn.setOnClickListener(this);
         isBtnMade = true;
+    }
+
+    protected void updateEditTextUI() {
+        mPhoneNumber.setText(EncryptedSPManager.getString(this,"phone"));
+        mLivingCity.setText(EncryptedSPManager.getString(this, "city"));
     }
 
     @Override
