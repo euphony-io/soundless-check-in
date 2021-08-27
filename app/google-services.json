@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "660736073084",
+    "project_id": "soundless-check-in",
+    "storage_bucket": "soundless-check-in.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660736073084:android:dfca92c037cd25880918f9",
+        "android_client_info": {
+          "package_name": "com.example.soundlesscheck_in"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660736073084-jrpvjmjrtf3b050gadchtccrnlv7mod6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdHFadKkttcSH29UJgFuj0afVsCIRdhSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660736073084-jrpvjmjrtf3b050gadchtccrnlv7mod6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

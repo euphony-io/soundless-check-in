@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,11 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import com.example.soundlesscheck_in.data.Store;
+import com.example.soundlesscheck_in.data.Visitor;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,6 +49,10 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
 
     EuRxManager mReceiver = new EuRxManager();
     private boolean isRunning = false;
+
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference visitorRef = db.collection("visitor");
+    private final CollectionReference storeRef = db.collection("store");
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_listener, container, false);
@@ -83,25 +93,30 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getData() {
+        String comName = EncryptedSPManager.getString(requireContext(), "name");
+        String comLoc = EncryptedSPManager.getString(requireContext(), "city") + " " + EncryptedSPManager.getString(requireContext(), "town");
 
-        String comName = EncryptedSPManager.getString(this.getActivity(), "name");
-        String comLoc = EncryptedSPManager.getString(this.getActivity(), "loc");
-
-        tvName.setText(comName);
-        tvLoc.setText(comLoc);
+        if(!comName.equals(EncryptedSPManager.DEFAULT_VALUE_STRING) && !comLoc.contains(EncryptedSPManager.DEFAULT_VALUE_STRING)){
+            tvName.setText(comName);
+            tvLoc.setText(comLoc);
+        }
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnGetInfo) {
             if (checkRecordAudioPermission()) {
-                controlReceiver();
+                if(EncryptedSPManager.getString(getContext(), "licenseNumber").equals(EncryptedSPManager.DEFAULT_VALUE_STRING)) {
+                    Toast.makeText(requireActivity(), "Please check-in after registering the store information.", Toast.LENGTH_LONG).show();
+                } else {
+                    controlReceiver();
+                }
             } else {
                 requestRecorderPermission();
             }
         }
         if (v.getId() == R.id.btnSetting_Listener) {
-            Intent intent = new Intent(this.getActivity().getApplicationContext(), SetCompanyActivity.class);
+            Intent intent = new Intent(requireActivity(), SetCompanyActivity.class);
             startActivity(intent);
         }
     }
@@ -109,14 +124,63 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     private void setUserInformation(String data){
         String[] userInfo = data.split("/");
 
-        if(userInfo.length == 2){
-            mTextTime.setText(String.format(getString(R.string.check_in_time), getTime()));
+        if(userInfo.length == 2) {
+            String currentTime = getTime();
+
+            Store store = new Store(
+                    EncryptedSPManager.getString(requireContext(), "licenseNumber"),
+                    EncryptedSPManager.getString(requireContext(), "name"),
+                    EncryptedSPManager.getString(requireContext(), "city"),
+                    EncryptedSPManager.getString(requireContext(), "town")
+                    );
+
+            Visitor visitor = new Visitor(userInfo[0], userInfo[1], store.getTradeName(), currentTime);
+
+            updateVisitorInformation(visitor);
+            updateStoreInformation(store, visitor);
+
+            mTextTime.setText(String.format(getString(R.string.check_in_time), currentTime));
             mTextPhoneNumber.setText(String.format(getString(R.string.customer_phone_number), userInfo[0]));
             mTextViewCity.setText(String.format(getString(R.string.customer_city), userInfo[1]));
+
             Toast.makeText(requireActivity(), "Check-in is complete!", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(requireActivity(), "Failed to get user information. : "+data, Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void updateVisitorInformation(Visitor visitor){
+        visitorRef.document(visitor.getPhoneNumber())
+                .collection(""+mNow)
+                .document(visitor.getDate())
+                .set(visitor)
+                .addOnSuccessListener( unused ->
+                        Log.d("ListenerFragment", "Success to save visitor information.")
+                )
+                .addOnFailureListener( e ->
+                        Log.w("ListenerFragment", "Failure to save visitor information :" + e.getMessage())
+                );
+    }
+
+    private void updateStoreInformation(Store store, Visitor visitor){
+        storeRef.document(store.getLicenseNumber())
+                .set(store)
+                .addOnSuccessListener( unused ->
+                        Log.d("ListenerFragment", "Success to save store information.")
+                )
+                .addOnFailureListener( e ->
+                        Log.w("ListenerFragment", "Failure to save store information :" + e.getMessage())
+                );
+
+        storeRef.document(store.getLicenseNumber()).collection("visitor")
+                .document(""+mNow)
+                .set(visitor)
+                .addOnSuccessListener( unused ->
+                        Log.d("ListenerFragment", "Success to save store's visitor information.")
+                )
+                .addOnFailureListener( e ->
+                        Log.w("ListenerFragment", "Failure to save store's visitor information :" + e.getMessage())
+                );
     }
 
     private void controlReceiver(){
