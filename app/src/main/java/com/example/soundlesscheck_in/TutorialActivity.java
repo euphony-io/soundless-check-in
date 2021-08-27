@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -77,9 +78,14 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnGetFirstInfo:
-                EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
-                EncryptedSPManager.setString(this, "city", mLivingCity.getText().toString());
-                finish();
+                if(mPhoneNumber.getText().toString().equals("")||mLivingCity.getText().toString().equals("")) {
+                    Toast.makeText(this,"Fill out the form!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
+                    EncryptedSPManager.setString(this, "city", mLivingCity.getText().toString());
+                    finish();
+                }
                 break;
             case btnCancel:
                 finish();
