@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/phonenumberTextView"
@@ -24,7 +24,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:hint="010-1234-5678"
-        android:inputType="phone"/>
+        android:inputType="phone" />
 
     <TextView
         android:id="@+id/citynameTextView"
@@ -47,6 +47,33 @@
         android:layout_marginLeft="20dp"
         android:hint="Gangnam-gu, Seoul"
         android:inputType="textCapSentences" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right">
+            android:layout_gravity="center"</Spinner>
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="right">
+            android:layout_gravity="center"</Spinner>
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:gravity="right">
+            android:layout_gravity="center"
+        </Spinner>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layoutTutorialButtons"
@@ -54,7 +81,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="40dp">
-
         <Button
             android:id="@+id/btnGetFirstInfo"
             android:layout_width="150dp"

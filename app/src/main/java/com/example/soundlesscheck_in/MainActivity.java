@@ -1,24 +1,37 @@
 package com.example.soundlesscheck_in;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
+
 
 import com.google.android.material.tabs.TabLayout;
-
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private SharedPreferences prefs;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         prefs = getSharedPreferences("Pref", MODE_PRIVATE);
         checkFirstRun();
@@ -59,9 +72,13 @@ public class MainActivity extends AppCompatActivity {
         if(isFirstRun) {
             prefs.edit().putBoolean("isFirstRun", false).apply();
 
+
             Intent tutorialIntent = new Intent(MainActivity.this, TutorialActivity.class);
             tutorialIntent.putExtra("boolean_checkFirst", true);
             startActivity(tutorialIntent);
         }
+
+
     }
 }
+

@@ -3,4 +3,27 @@
     <string name="check_in_time">Time : %s</string>
     <string name="customer_phone_number">Phone number : %s</string>
     <string name="customer_city">City : %s</string>
+    <string-array name = "spinner_do">
+        <item>서울</item>
+        <item>인천</item>
+        <item>광주</item>
+        <item>대구</item>
+        <item>울산</item>
+        <item>대전</item>
+    </string-array>
+    <string-array name = "spinner_do_seoul">
+        <item>강남구</item>
+        <item>강동구</item>
+        <item>강북구</item>
+        <item>강서구</item>
+        <item>관악구</item>
+    </string-array>
+    <string-array name = "spinner_do_incheon">
+        <item>강화군</item>
+        <item>계양구</item>
+        <item>남구</item>
+        <item>남동구</item>
+        <item>동구</item>
+        <item>부평구</item>
+    </string-array>
 </resources>
