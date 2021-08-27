@@ -18,14 +18,12 @@ public class SetCompanyActivity extends AppCompatActivity implements View.OnClic
     private EditText mCompanyNum;
     private TextView mCompanyCity;
     private TextView mCompanySigungu;
-    private TextView mCompanyDong;
     private EditText mCompanyName;
     private Button mGetInfoBtn;
     private Button mCancleBtn;
 
     private Spinner spinnerCity;
     private Spinner spinnerSigungu;
-    private Spinner spinnerDong;
 
     private ArrayAdapter<String> arrayAdapter;
 
@@ -153,96 +151,10 @@ public class SetCompanyActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mCompanySigungu.setText(spinnerSigungu.getSelectedItem().toString());
-
-                if(spinnerCity.getSelectedItemPosition() == 1 && spinnerSigungu.getSelectedItemPosition() > -1) {
-                    switch(position) {
-
-                        case 0:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gangnam);
-                            break;
-                        case 1:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gangdong);
-                            break;
-                        case 2:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gangbuk);
-                            break;
-                        case 3:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gangseo);
-                            break;
-                        case 4:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gwanak);
-                            break;
-                        case 5:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gwangjin);
-                            break;
-                        case 6:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_guro);
-                            break;
-                        case 7:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_geumcheon);
-                            break;
-                        case 8:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_nowon);
-                            break;
-                        case 9:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_dobong);
-                            break;
-                        case 10:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_dongdaemun);
-                            break;
-                        case 11:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_dongjag);
-                            break;
-                        case 12:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_mapo);
-                            break;
-                        case 13:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_seodaemun);
-                            break;
-                        case 14:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_seocho);
-                            break;
-                        case 15:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_seongdong);
-                            break;
-                        case 16:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_seongbuk);
-                            break;
-                        case 17:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_songpa);
-                            break;
-                        case 18:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_yangcheon);
-                            break;
-                        case 19:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_yeongdeungpo);
-                            break;
-                        case 20:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_yongsan);
-                            break;
-                        case 21:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_eunpyeong);
-                            break;
-                        case 22:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_jongno);
-                            break;
-                        case 23:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_jung);
-                            break;
-                        case 24:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_jungnanggu);
-                            break;
-                    }
-                } else {
-
-                }
-
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
     }
@@ -253,25 +165,9 @@ public class SetCompanyActivity extends AppCompatActivity implements View.OnClic
             arrayAdapter = null;
         }
 
-        if (spinnerCity.getSelectedItemPosition() > 1) {
-            spinnerDong.setAdapter(null);
-        }
-
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[])getResources().getStringArray(array_resource));
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSigungu.setAdapter(arrayAdapter);
-    }
-
-    private void setDongSpinnerAdapterItem(int array_resource) {
-        if (arrayAdapter != null) {
-            spinnerDong.setAdapter(null);
-            arrayAdapter = null;
-        }
-
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[])getResources().getStringArray(array_resource));
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDong.setAdapter(arrayAdapter);
-
     }
 
 }
