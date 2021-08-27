@@ -88,7 +88,6 @@
         android:layout_toRightOf="@id/companyCity"
         android:textSize="20dp" />
 
-
     <Spinner
         android:id="@+id/spin_city"
         android:layout_width="300dp"
