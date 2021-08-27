@@ -8,9 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,21 +91,22 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getData() {
+        String comName = EncryptedSPManager.getString(requireContext(), "name");
+        String comLoc = EncryptedSPManager.getString(requireContext(), "city") + " " + EncryptedSPManager.getString(requireContext(), "town");
 
-        String comName = EncryptedSPManager.getString(this.getActivity(), "name");
-        String comLoc = EncryptedSPManager.getString(this.getActivity(), "loc");
-
-        tvName.setText(comName);
-        tvLoc.setText(comLoc);
+        if(!comName.equals(EncryptedSPManager.DEFAULT_VALUE_STRING) && !comLoc.contains(EncryptedSPManager.DEFAULT_VALUE_STRING)){
+            tvName.setText(comName);
+            tvLoc.setText(comLoc);
+        }
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnGetInfo) {
             if (checkRecordAudioPermission()) {
-                if(EncryptedSPManager.getString(getContext(), "licenseNumber").equals(EncryptedSPManager.DEFAULT_VALUE_STRING)){
+                if(EncryptedSPManager.getString(getContext(), "licenseNumber").equals(EncryptedSPManager.DEFAULT_VALUE_STRING)) {
                     Toast.makeText(requireActivity(), "Please check-in after registering the store information.", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     controlReceiver();
                 }
             } else {
@@ -115,7 +114,7 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
             }
         }
         if (v.getId() == R.id.btnSetting_Listener) {
-            Intent intent = new Intent(this.getActivity().getApplicationContext(), SetCompanyActivity.class);
+            Intent intent = new Intent(requireActivity(), SetCompanyActivity.class);
             startActivity(intent);
         }
     }
@@ -123,14 +122,20 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     private void setUserInformation(String data){
         String[] userInfo = data.split("/");
 
-        if(userInfo.length == 2){
+        if(userInfo.length == 2) {
             String currentTime = getTime();
 
-            Visitor visitor = new Visitor(userInfo[0], userInfo[1], "", currentTime);
-            Store store = new Store(EncryptedSPManager.getString(getContext(), "licenseNumber"), visitor);
+            Store store = new Store(
+                    EncryptedSPManager.getString(requireContext(), "licenseNumber"),
+                    EncryptedSPManager.getString(requireContext(), "name"),
+                    EncryptedSPManager.getString(requireContext(), "city"),
+                    EncryptedSPManager.getString(requireContext(), "town")
+                    );
+
+            Visitor visitor = new Visitor(userInfo[0], userInfo[1], store.getTradeName(), currentTime);
 
             updateVisitorInformation(visitor);
-            updateStoreInformation(store);
+            updateStoreInformation(store, visitor);
 
             mTextTime.setText(String.format(getString(R.string.check_in_time), currentTime));
             mTextPhoneNumber.setText(String.format(getString(R.string.customer_phone_number), userInfo[0]));
@@ -144,6 +149,8 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
 
     private void updateVisitorInformation(Visitor visitor){
         visitorRef.document(visitor.getPhoneNumber())
+                .collection(""+mNow)
+                .document(visitor.getDate())
                 .set(visitor)
                 .addOnSuccessListener( unused ->
                         Log.d("ListenerFragment", "Success to save visitor information.")
@@ -153,7 +160,7 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
                 );
     }
 
-    private void updateStoreInformation(Store store){
+    private void updateStoreInformation(Store store, Visitor visitor){
         storeRef.document(store.getLicenseNumber())
                 .set(store)
                 .addOnSuccessListener( unused ->
@@ -161,6 +168,16 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
                 )
                 .addOnFailureListener( e ->
                         Log.w("ListenerFragment", "Failure to save store information :" + e.getMessage())
+                );
+
+        storeRef.document(store.getLicenseNumber()).collection("visitor")
+                .document(""+mNow)
+                .set(visitor)
+                .addOnSuccessListener( unused ->
+                        Log.d("ListenerFragment", "Success to save store's visitor information.")
+                )
+                .addOnFailureListener( e ->
+                        Log.w("ListenerFragment", "Failure to save store's visitor information :" + e.getMessage())
                 );
     }
 
