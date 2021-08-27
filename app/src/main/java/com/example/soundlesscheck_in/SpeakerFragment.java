@@ -1,5 +1,6 @@
 package com.example.soundlesscheck_in;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,8 +27,8 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     private TextView tvNumber;
     private TextView tvCity;
     private Button btnCheckIn;
+    private Button btnSetting;
     //
-    private SharedPreferences prefs;
     private String data;        // data that gonna be sent.
     private String phoneNumber;
     private String livingCity;
@@ -52,6 +53,8 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
         tvCity = v.findViewById(R.id.textViewCityEdit_Speaker);
         btnCheckIn = v.findViewById(R.id.btnCheckIn);
         btnCheckIn.setOnClickListener(this);
+        btnSetting = v.findViewById(R.id.btnSetting_Speaker);
+        btnSetting.setOnClickListener(this);
     }
 
     private void getData() {
@@ -69,15 +72,27 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (speak) {
-            // Toast.makeText(getActivity(), "Stop", Toast.LENGTH_SHORT).show();
-            mTxManager.stop();
-            speak = false;
-        } else {
-            // Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
-            mTxManager.euInitTransmit(data);
-            mTxManager.process(-1);      // -1 : generate sound infinite
-            speak = true;
+        switch (v.getId()) {
+            case R.id.btnCheckIn :
+                if (speak) {
+                    // Toast.makeText(getActivity(), "Stop", Toast.LENGTH_SHORT).show();
+                    mTxManager.stop();
+                    speak = false;
+                } else {
+                    // Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
+                    mTxManager.euInitTransmit(data);
+                    mTxManager.process(-1);      // -1 : generate sound infinite
+                    speak = true;
+                }
+                break;
+            case R.id.btnSetting_Speaker :
+                Intent tutorialIntent = new Intent(getActivity(), TutorialActivity.class);
+                tutorialIntent.putExtra("boolean_checkFirst", false);
+                startActivity(tutorialIntent);
+                break;
+            default:
+                break;
+
         }
     }
 

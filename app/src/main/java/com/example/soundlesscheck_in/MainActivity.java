@@ -57,9 +57,10 @@ public class MainActivity extends AppCompatActivity {
         boolean isFirstRun = prefs.getBoolean("isFirstRun", true);
 
         if(isFirstRun) {
-            prefs.edit().putBoolean("isFirstRun", false).apply();;
+            prefs.edit().putBoolean("isFirstRun", false).apply();
 
             Intent tutorialIntent = new Intent(MainActivity.this, TutorialActivity.class);
+            tutorialIntent.putExtra("boolean_checkFirst", true);
             startActivity(tutorialIntent);
         }
     }
