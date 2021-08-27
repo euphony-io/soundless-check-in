@@ -109,18 +109,12 @@
         android:layout_below="@id/spin_city"
         android:spinnerMode="dialog" />
 
-    <Spinner
-        android:id="@+id/spin_dong"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spin_sigungu"
-        android:spinnerMode="dialog" />
 
     <Button
         android:id="@+id/btnGetCompanyInfo"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spin_dong"
+        android:layout_below="@id/spin_sigungu"
         android:layout_gravity="center"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="40dp"
@@ -133,7 +127,7 @@
         android:id="@+id/btnCancleCompanyInfo"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spin_dong"
+        android:layout_below="@id/spin_sigungu"
         android:layout_gravity="center"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="40dp"
