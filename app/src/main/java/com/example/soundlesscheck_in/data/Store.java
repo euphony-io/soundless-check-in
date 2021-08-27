@@ -3,17 +3,14 @@ package com.example.soundlesscheck_in.data;
 public class Store {
     private String licenseNumber;
     private String tradeName;
-    private Visitor visitor;
+    private String city;
+    private String town;
 
-    public Store(String licenseNumber, Visitor visitor) {
-        this.licenseNumber = licenseNumber;
-        this.visitor = visitor;
-    }
-
-    public Store(String licenseNumber, String tradeName, Visitor visitor) {
+    public Store(String licenseNumber, String tradeName, String city, String town) {
         this.licenseNumber = licenseNumber;
         this.tradeName = tradeName;
-        this.visitor = visitor;
+        this.city = city;
+        this.town = town;
     }
 
     public String getLicenseNumber() {
@@ -32,11 +29,19 @@ public class Store {
         this.tradeName = tradeName;
     }
 
-    public Visitor getVisitor() {
-        return visitor;
+    public String getCity() {
+        return city;
     }
 
-    public void setVisitor(Visitor visitor) {
-        this.visitor = visitor;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
     }
 }
