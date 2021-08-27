@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SetCompanyActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/companyNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:paddingHorizontal="3dp"
+        android:text="Enter the company registration number : "
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/companyNumEditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/companyNumTextView"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:hint="XXX-XX-XXXXX"
+        android:inputType="phone" />
+
+    <TextView
+        android:id="@+id/companyNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyNumEditText"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:paddingHorizontal="3dp"
+        android:text="Enter the name of company : "
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/companyNameEditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyNameTextView"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:hint="Mcdonalds"
+        android:inputType="textCapSentences" />
+
+
+    <TextView
+        android:id="@+id/companyLocTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyNameEditText"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:paddingHorizontal="3dp"
+        android:text="Enter the location of company : "
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/companyCity"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyLocTextView"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:hint="서울특별시"
+        android:inputType="textCapSentences" />
+
+    <TextView
+        android:id="@+id/companySigungu"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/companyCity"
+        android:layout_alignBaseline="@id/companyCity"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:hint="강남구"
+        android:inputType="textCapSentences" />
+
+
+    <Spinner
+        android:id="@+id/spin_city"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyCity"
+        android:layout_marginTop="10dp"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spin_sigungu"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spin_city"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spin_dong"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spin_sigungu"
+        android:spinnerMode="dialog" />
+
+    <Button
+        android:id="@+id/btnGetCompanyInfo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spin_dong"
+        android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_background"
+        android:text="OK"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp" />
+
+    <Button
+        android:id="@+id/btnCancleCompanyInfo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spin_dong"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_toRightOf="@id/btnGetCompanyInfo"
+        android:background="@drawable/btn_background"
+        android:text="Cancle"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp" />
+
+</RelativeLayout>
