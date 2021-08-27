@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SetCompanyActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".SetCompanyActivity">
 
     <TextView
         android:id="@+id/companyNumTextView"
@@ -70,28 +69,24 @@
 
     <TextView
         android:id="@+id/companyCity"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/companyLocTextView"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:hint="서울특별시"
-        android:inputType="textCapSentences" />
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/companySigungu"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/companyCity"
         android:layout_alignBaseline="@id/companyCity"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:hint="강남구"
-        android:inputType="textCapSentences" />
+        android:layout_toRightOf="@id/companyCity"
+        android:textSize="20dp" />
 
 
     <Spinner
@@ -99,7 +94,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/companyCity"
-        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:spinnerMode="dialog" />
 
     <Spinner
@@ -107,6 +103,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/spin_city"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:spinnerMode="dialog" />
 
 
@@ -115,11 +113,12 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/spin_sigungu"
-        android:layout_gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="41dp"
         android:background="@drawable/btn_background"
         android:text="OK"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="25dp" />
 
@@ -128,12 +127,15 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/spin_sigungu"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="40dp"
-        android:layout_toRightOf="@id/btnGetCompanyInfo"
+        android:layout_marginEnd="40dp"
+        android:layout_toEndOf="@id/btnGetCompanyInfo"
         android:background="@drawable/btn_background"
-        android:text="Cancle"
+        android:text="Cancel"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="25dp" />
 
