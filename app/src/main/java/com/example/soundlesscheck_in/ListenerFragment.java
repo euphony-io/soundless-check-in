@@ -1,12 +1,15 @@
 package com.example.soundlesscheck_in;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,9 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     TextView mTextPhoneNumber;
     TextView mTextViewCity;
 
+    TextView tvName;
+    TextView tvLoc;
+
     private final int PERMISSION_REQUEST_RECORD_AUDIO = 2021;
 
     EuRxManager mReceiver = new EuRxManager();
@@ -48,6 +54,12 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         initUI(view);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
+
     private void initUI(View v) {
         mBtnSetting = v.findViewById(R.id.btnSetting_Listener);
         mBtnGetInfo = v.findViewById(R.id.btnGetInfo);
@@ -58,12 +70,25 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         mBtnSetting.setOnClickListener(this);
         mBtnGetInfo.setOnClickListener(this);
 
+        tvName = v.findViewById(R.id.companyName);
+        tvLoc = v.findViewById(R.id.companyLoc);
+
+
         requestRecorderPermission();
 
         mReceiver.setAcousticSensor(letters -> {
             setUserInformation(letters);
             isRunning = false;
         });
+    }
+
+    private void getData() {
+
+        String comName = EncryptedSPManager.getString(this.getActivity(), "name");
+        String comLoc = EncryptedSPManager.getString(this.getActivity(), "loc");
+
+        tvName.setText(comName);
+        tvLoc.setText(comLoc);
     }
 
     @Override
@@ -76,7 +101,8 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
             }
         }
         if (v.getId() == R.id.btnSetting_Listener) {
-
+            Intent intent = new Intent(this.getActivity().getApplicationContext(), SetCompanyActivity.class);
+            startActivity(intent);
         }
     }
 
