@@ -3,6 +3,7 @@ package com.example.soundlesscheck_in;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,8 +14,6 @@ import android.widget.TextView;
 
 
 public class SetCompanyActivity extends AppCompatActivity implements View.OnClickListener{
-
-
     private EditText mCompanyNum;
     private TextView mCompanyCity;
     private TextView mCompanySigungu;
@@ -40,6 +39,12 @@ public class SetCompanyActivity extends AppCompatActivity implements View.OnClic
 
         initAddressSpinner();
 
+        if(!EncryptedSPManager.getString(getApplicationContext(), "licenseNumber").equals(EncryptedSPManager.DEFAULT_VALUE_STRING)){
+            mCompanyNum.setText(EncryptedSPManager.getString(getApplicationContext(), "licenseNumber"));
+            mCompanyName.setText(EncryptedSPManager.getString(getApplicationContext(), "name"));
+            spinnerCity.setSelection(arrayAdapter.getPosition(EncryptedSPManager.getString(getApplicationContext(), "city")));
+            spinnerSigungu.setSelection(arrayAdapter.getPosition(EncryptedSPManager.getString(getApplicationContext(), "town")));
+        }
     }
 
     protected void setUI() {
@@ -65,9 +70,10 @@ public class SetCompanyActivity extends AppCompatActivity implements View.OnClic
         }
 
         if (v == mGetInfoBtn) {
+            EncryptedSPManager.setString(this, "licenseNumber", mCompanyNum.getText().toString());
             EncryptedSPManager.setString(this, "name", mCompanyName.getText().toString());
-            EncryptedSPManager.setString(this, "loc", mCompanyCity.getText().toString()
-                                                                + ' ' + mCompanySigungu.getText().toString());
+            EncryptedSPManager.setString(this, "city", mCompanyCity.getText().toString());
+            EncryptedSPManager.setString(this, "town", mCompanySigungu.getText().toString());
 
             finish();
         }
