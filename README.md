@@ -3,6 +3,7 @@
 ![euphony_logo](https://user-images.githubusercontent.com/8490058/129358383-14b6f34d-9264-4c49-9538-3ef2e62a6490.png)
 
 This is a check-in application that identifies visitors, especially effective during the COVID-19.
+
 This application stores below informations in database
 > Visitor's phone number
 > Visitor's residential area
@@ -35,11 +36,14 @@ But, This application has no such inconvenience as using sound wave communicatio
 ## Report Issues
 
 To report a specific problem or feature request, [please open a new issue](https://github.com/euphony-io/soundless-check-in/issues/new/choose). 
+
 Your participation drives the development of the application!
 
 ## Library
 
 It is based on Euphony library. 
+
 Official Facebook Page : https://www.facebook.com/euphonyproject
+
 Official Library Site : https://dev.jbear.co/euphony
 
