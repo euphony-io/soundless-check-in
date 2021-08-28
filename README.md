@@ -5,9 +5,9 @@
 This is a check-in application that identifies visitors, especially effective during the COVID-19.
 
 This application stores below informations in database
-> Visitor's phone number
-> Visitor's residential area
-> Information of company that they visit
+> Visitor's phone number  
+> Visitor's residential area  
+> Information of company that they visit  
 
 ## Reason for making this application
 
