@@ -53,7 +53,7 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     protected void setUI() {
         mLayout = findViewById(R.id.layoutTutorialButtons);
         mPhoneNumber = findViewById(R.id.phonenumberEditText);
-        mLivingCity = findViewById(R.id.citynameEditText);
+        //mLivingCity = findViewById(R.id.citynameEditText);
         mGetInfoBtn = findViewById(R.id.btnGetFirstInfo);
         mPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         mGetInfoBtn.setOnClickListener(this);
