@@ -2,6 +2,7 @@ package com.example.soundlesscheck_in;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +14,6 @@ public class GetCityTownInfo extends AppCompatActivity {
     private String[] townArray;
 
     // return value
-    private String city;
     private int cityPos;
     private int townPos;
 
@@ -23,13 +23,31 @@ public class GetCityTownInfo extends AppCompatActivity {
     }
 
     protected String stringToPosition(String city, String town) {
-        return null;
+        cityArray = res.getStringArray(R.array.spinner_region);
+
+        for(int i=1;i<cityArray.length;i++) {
+            if(cityArray[i].equals(city)) {
+                cityPos = i;
+                break;
+            }
+        }
+        foundTownList(cityPos);
+
+        for(int i=0;i<townArray.length;i++) {
+            if(townArray[i].equals(town)) {
+                townPos = i;
+                break;
+            }
+        }
+
+        return cityPos+"/"+townPos;
     }
 
     protected String positionToString(int cityPosition, int townPosition) {
         if(cityPosition<=0) return null;
         else {
             cityArray = res.getStringArray(R.array.spinner_region);
+            String city = cityArray[cityPosition];
             foundTownList(cityPosition);
             city += " "+getTownName(townPosition);
 
@@ -43,7 +61,6 @@ public class GetCityTownInfo extends AppCompatActivity {
     }
 
     protected void foundTownList(int position) {
-        city = cityArray[position];
         switch (position) {
             case 1:
                 townArray = res.getStringArray(R.array.spinner_region_seoul);

@@ -114,9 +114,6 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
                     EncryptedSPManager.setString(this, "userCity", mCity.getText().toString());
                     EncryptedSPManager.setString(this, "userTown", mTown.getText().toString());
 
-                    EncryptedSPManager.setInt(this, "cityPos", mCityPosition);
-                    EncryptedSPManager.setInt(this, "townPos", mTownPosition);
-
                     finish();
                 }
                 break;

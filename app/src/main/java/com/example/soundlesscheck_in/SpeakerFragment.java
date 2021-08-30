@@ -14,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 
 import euphony.lib.transmitter.EuTxManager;
 
@@ -23,6 +21,7 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
 
     private boolean speak = false;
     private CustomToast toast;
+    private GetCityTownInfo getCityTownInfo;
     // Variables of UI component
     private TextView tvNumber;
     private TextView tvCity;
@@ -30,8 +29,10 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     private Button btnSetting;
     //
     private String data;        // data that gonna be sent.
+    private String[] positions;
     private String phoneNumber;
     private String livingCity;
+    private String livingTown;
     private int mCityPosition;
     private int mTownPosition;
     // Euphony Library
@@ -41,6 +42,7 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_speaker, container,false);
         setUI(v);
         toast = new CustomToast(this.getContext());
+        getCityTownInfo = new GetCityTownInfo(this.getContext());
         return v;
     }
 
@@ -63,22 +65,27 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     private void getData() {
         // necessary information
         phoneNumber = EncryptedSPManager.getString(this.getActivity(), "phone");
-        livingCity = EncryptedSPManager.getString(requireContext(), "userCity") + " " + EncryptedSPManager.getString(requireContext(), "userTown");
+        livingCity = EncryptedSPManager.getString(requireContext(), "userCity");
+        livingTown = EncryptedSPManager.getString(requireContext(), "userTown");
 
-        mCityPosition = EncryptedSPManager.getInt(requireContext(), "cityPos");
-        mTownPosition = EncryptedSPManager.getInt(requireContext(), "townPos");
-
-        // how to get city info via position number by using GetCityTownInfo class
-    //     GetCityTownInfo getCityTownInfo = new GetCityTownInfo(this.getContext());
-    //     String cityInfo = getCityTownInfo.positionToString(mCityPosition, mTownPosition);
-    //     Log.d("checkCity", cityInfo);
+        positions = getCityTownInfo.stringToPosition(livingCity, livingTown).split("/");
+        mCityPosition = Integer.parseInt(positions[0]);
+        mTownPosition = Integer.parseInt(positions[1]);
+    //    Log.d("checkcitypos", mCityPosition+"/"+mTownPosition);
+    //    Log.d("realcitypos", String.valueOf(EncryptedSPManager.getInt(requireContext(), "cityPos")));
+    //    Log.d("realtownpos", String.valueOf(EncryptedSPManager.getInt(requireContext(), "townPos")));
 
         data = phoneNumber+"/"+mCityPosition+"/"+mTownPosition;
         // Data format : 010-xxxx-xxxx/x/x
         // ex) 010-1234-1234/1/3 (1:city position, 3:town position)
 
+        // how to get city info via position number by using GetCityTownInfo class : for Listener Fragment !!
+    //    GetCityTownInfo getCityTownInfo = new GetCityTownInfo(this.getContext());
+    //    String cityInfo = getCityTownInfo.positionToString(mCityPosition, mTownPosition);
+    //    Log.d("frompos", cityInfo);
+
         tvNumber.setText(phoneNumber);
-        tvCity.setText(livingCity);
+        tvCity.setText(livingCity+" "+livingTown);
     }
 
     @Override
