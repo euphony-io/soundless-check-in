@@ -19,9 +19,6 @@ public class CustomToast extends Toast {
         super(context);
         mContext = context;
 
-    //    LayoutInflater inflater;
-    //    View v;
-
         inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.custom_toast_layout, null);
         text = (TextView) v.findViewById(R.id.toast_text);
@@ -36,7 +33,7 @@ public class CustomToast extends Toast {
     }
 
     private void show(Toast toast, View v, int duration) {
-        toast.setGravity(Gravity.CENTER,0, 400);
+        toast.setGravity(Gravity.CENTER,0, 600);
         toast.setDuration(duration);
         toast.setView(v);
         toast.show();

@@ -78,12 +78,10 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btnCheckIn :
                 if (speak) {
-                //    Toast.makeText(getActivity(), "Stop", Toast.LENGTH_SHORT).show();
                     toast.showToast("Stop Check-in", Toast.LENGTH_SHORT);
                     mTxManager.stop();
                     speak = false;
                 } else {
-                //    Toast.makeText(getActivity(), "Check In !", Toast.LENGTH_SHORT).show();
                     toast.showToast("Check In !", Toast.LENGTH_SHORT);
                     mTxManager.euInitTransmit(data);
                     mTxManager.process(-1);      // -1 : generate sound infinite

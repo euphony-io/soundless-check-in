@@ -81,7 +81,6 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.btnGetFirstInfo:
                 if(mPhoneNumber.getText().toString().equals("")||mLivingCity.getText().toString().equals("")) {
-                //    Toast.makeText(this,"Fill out the form!",Toast.LENGTH_SHORT).show();
                     toast.showToast("Fill out the form!", Toast.LENGTH_LONG);
                 }
                 else {

@@ -109,7 +109,6 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.btnGetInfo) {
             if (checkRecordAudioPermission()) {
                 if(EncryptedSPManager.getString(getContext(), "licenseNumber").equals(EncryptedSPManager.DEFAULT_VALUE_STRING)) {
-                //    Toast.makeText(requireActivity(), "Please check-in after registering the store information.", Toast.LENGTH_LONG).show();
                     toast.showToast("Please check-in after registering the store information.", Toast.LENGTH_LONG);
                 } else {
                     controlReceiver();
@@ -146,10 +145,8 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
             mTextPhoneNumber.setText(String.format(getString(R.string.customer_phone_number), userInfo[0]));
             mTextViewCity.setText(String.format(getString(R.string.customer_city), userInfo[1]));
 
-        //    Toast.makeText(requireActivity(), "Check-in is complete!", Toast.LENGTH_LONG).show();
             toast.showToast("Check-in is complete!", Toast.LENGTH_LONG);
         }else{
-        //    Toast.makeText(requireActivity(), "Failed to get user information. : "+data, Toast.LENGTH_LONG).show();
             toast.showToast("Failed to get user information. : "+data, Toast.LENGTH_LONG);
         }
     }
@@ -195,7 +192,6 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
         }else{
             mReceiver.listen();
             isRunning = true;
-        //    Toast.makeText(requireActivity(), "Getting user information...", Toast.LENGTH_LONG).show();
             toast.showToast("Getting user informaion...", Toast.LENGTH_LONG);
         }
     }
