@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/phonenumberTextView"
         android:layout_width="wrap_content"
@@ -15,16 +16,14 @@
         android:text="Enter Your Phone Number : "
         android:textColor="#000000"
         android:textSize="20dp" />
+
     <EditText
         android:id="@+id/phonenumberEditText"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:hint="폰번호를 입력하세요."
-        android:inputType="textPersonName"
-        android:text="Enter Your Phone number"
-        android:textColor="#808080"
-        />
+        android:hint="010-XXXX-XXXX"
+        android:inputType="phone" />
 
     <TextView
         android:id="@+id/citynameTextView"
@@ -38,54 +37,62 @@
         android:textColor="#000000"
         android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/userCity"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/companyLocTextView"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp" />
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/userTown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/companyCity"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/companyCity"
-        android:textSize="20dp" />
+        <TextView
+            android:id="@+id/userCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/userTown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
+
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="right"
-            android:layout_gravity="center"/>
+            android:gravity="right" />
+
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="0dp"
             android:layout_height="30dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="right"
-            android:layout_gravity="center"/>
+            android:gravity="right" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/layoutTutorialButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="40dp">
+
         <Button
             android:id="@+id/btnGetFirstInfo"
             android:layout_width="150dp"
