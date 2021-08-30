@@ -2,6 +2,7 @@ package com.example.soundlesscheck_in;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,12 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     private TextView tvCity;
     private Button btnCheckIn;
     private Button btnSetting;
-
     //
     private String data;        // data that gonna be sent.
     private String phoneNumber;
     private String livingCity;
+    private int mCityPosition;
+    private int mTownPosition;
     // Euphony Library
     private EuTxManager mTxManager = new EuTxManager();
 
@@ -61,15 +63,22 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     private void getData() {
         // necessary information
         phoneNumber = EncryptedSPManager.getString(this.getActivity(), "phone");
-        livingCity = EncryptedSPManager.getString(this.getActivity(), "city");
-        String UserLoc = EncryptedSPManager.getString(requireContext(), "userCity") + " " + EncryptedSPManager.getString(requireContext(), "userTown");
+        livingCity = EncryptedSPManager.getString(requireContext(), "userCity") + " " + EncryptedSPManager.getString(requireContext(), "userTown");
 
-        data = phoneNumber+"/"+livingCity;
-        // Data format : 010-xxxx-xxxx/City(English)
-        // ex) 010-1234-1234/Seoul
+        mCityPosition = EncryptedSPManager.getInt(requireContext(), "cityPos");
+        mTownPosition = EncryptedSPManager.getInt(requireContext(), "townPos");
+
+        // how to get city info via position number by using GetCityTownInfo class
+    //     GetCityTownInfo getCityTownInfo = new GetCityTownInfo(this.getContext());
+    //     String cityInfo = getCityTownInfo.positionToString(mCityPosition, mTownPosition);
+    //     Log.d("checkCity", cityInfo);
+
+        data = phoneNumber+"/"+mCityPosition+"/"+mTownPosition;
+        // Data format : 010-xxxx-xxxx/x/x
+        // ex) 010-1234-1234/1/3 (1:city position, 3:town position)
 
         tvNumber.setText(phoneNumber);
-        tvCity.setText(UserLoc);
+        tvCity.setText(livingCity);
     }
 
     @Override

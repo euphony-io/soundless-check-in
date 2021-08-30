@@ -1,6 +1,5 @@
 package com.example.soundlesscheck_in;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,7 +68,6 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         spinnerSigungu = findViewById(R.id.spinner2);
 
         mCity = findViewById(R.id.userCity);
-
         mTown = findViewById(R.id.userTown);
 
         mPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
@@ -116,6 +113,10 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
                     EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
                     EncryptedSPManager.setString(this, "userCity", mCity.getText().toString());
                     EncryptedSPManager.setString(this, "userTown", mTown.getText().toString());
+
+                    EncryptedSPManager.setInt(this, "cityPos", mCityPosition);
+                    EncryptedSPManager.setInt(this, "townPos", mTownPosition);
+
                     finish();
                 }
                 break;
