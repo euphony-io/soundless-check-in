@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +29,7 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     private TextView tvCity;
     private Button btnCheckIn;
     private Button btnSetting;
+
     //
     private String data;        // data that gonna be sent.
     private String phoneNumber;
@@ -64,13 +64,14 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
         // necessary information
         phoneNumber = EncryptedSPManager.getString(this.getActivity(), "phone");
         livingCity = EncryptedSPManager.getString(this.getActivity(), "city");
+        String UserLoc = EncryptedSPManager.getString(requireContext(), "userCity") + " " + EncryptedSPManager.getString(requireContext(), "userTown");
 
         data = phoneNumber+"/"+livingCity;
         // Data format : 010-xxxx-xxxx/City(English)
         // ex) 010-1234-1234/Seoul
 
         tvNumber.setText(phoneNumber);
-        tvCity.setText(livingCity);
+        tvCity.setText(UserLoc);
     }
 
     @Override
