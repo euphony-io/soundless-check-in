@@ -18,6 +18,7 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     private static final int btnCancel = 11111;
     private boolean isFirst;
     private boolean isBtnMade = false;
+    private CustomToast toast;
 
     private LinearLayout mLayout;
     private EditText mPhoneNumber;
@@ -29,6 +30,7 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutorial);
+        toast = new CustomToast(this);
 
         setUI();
     }
@@ -79,7 +81,7 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.btnGetFirstInfo:
                 if(mPhoneNumber.getText().toString().equals("")||mLivingCity.getText().toString().equals("")) {
-                    Toast.makeText(this,"Fill out the form!",Toast.LENGTH_SHORT).show();
+                    toast.showToast("Fill out the form!", Toast.LENGTH_LONG);
                 }
                 else {
                     EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());

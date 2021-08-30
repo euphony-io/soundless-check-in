@@ -24,6 +24,7 @@ import euphony.lib.transmitter.EuTxManager;
 public class SpeakerFragment extends Fragment implements View.OnClickListener {
 
     private boolean speak = false;
+    private CustomToast toast;
     // Variables of UI component
     private TextView tvNumber;
     private TextView tvCity;
@@ -39,6 +40,7 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_speaker, container,false);
         setUI(v);
+        toast = new CustomToast(this.getContext());
         return v;
     }
 
@@ -76,11 +78,11 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btnCheckIn :
                 if (speak) {
-                    Toast.makeText(getActivity(), "Stop", Toast.LENGTH_SHORT).show();
+                    toast.showToast("Stop Check-in", Toast.LENGTH_SHORT);
                     mTxManager.stop();
                     speak = false;
                 } else {
-                    Toast.makeText(getActivity(), "Check In !", Toast.LENGTH_SHORT).show();
+                    toast.showToast("Check In !", Toast.LENGTH_SHORT);
                     mTxManager.euInitTransmit(data);
                     mTxManager.process(-1);      // -1 : generate sound infinite
                     speak = true;
