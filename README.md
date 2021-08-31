@@ -22,16 +22,19 @@ But, This application has no such inconvenience as using sound wave communicatio
 ## Run the app
 * ### Visitor
  
-<img src="https://user-images.githubusercontent.com/88221233/131171579-b1764fac-3113-4c3c-a3d8-a3a05293747a.png"  width="250" height="400"/>  <img src="https://user-images.githubusercontent.com/88221233/131210946-1699ae82-1fb9-4316-84fe-d4eefb7f07c5.png"  width="250" height="400"/> <img src="https://user-images.githubusercontent.com/88221233/131171850-6826b0ca-af2d-4819-98c3-97268812404d.png"  width="250" height="400"/>
+<img src="https://user-images.githubusercontent.com/88221233/131532711-abb92781-f300-46c2-9d2e-4ad47cd81403.png"  width="250" height="400"/>  <img src="https://user-images.githubusercontent.com/88221233/131532769-1bdbd2ff-56ea-4055-81c8-b08befa37f9f.png"  width="250" height="400"/> <img src="https://user-images.githubusercontent.com/88221233/131533427-011db8af-8c86-4645-b61a-37e64430e25f.png"  width="250" height="400"/>
 1. Press setting icon
 2. Enter your phone number, and residential area
-3. Check your information, and press 'CHECK IN'
+3. Check your information.
+4. If you want to check in, press 'CHECK IN'
 
 * ### Company
 
-<img src="https://user-images.githubusercontent.com/88221233/131173092-734265c0-2cfa-41a6-91c5-c2dcc38f916d.png"  width="250" height="400"/>  <img src="https://user-images.githubusercontent.com/88221233/131173182-922e3e0d-bfe4-45fb-a444-eea690742993.png"  width="250" height="400"/> <img src="https://user-images.githubusercontent.com/88221233/131173224-6939d699-1c70-4516-87b6-0bb442cb5f5e.png"  width="250" height="400"/>
+<img src="https://user-images.githubusercontent.com/88221233/131533525-4cf5e19e-2595-4fc7-9f87-275cdf25192b.png"  width="250" height="400"/>  <img src="https://user-images.githubusercontent.com/88221233/131533585-aef37658-a134-4a2e-9b3c-010d9e160a95.png"  width="250" height="400"/> <img src="https://user-images.githubusercontent.com/88221233/131533642-5e1c360e-0246-4086-9c0e-47b5564e6cdd.png"  width="250" height="400"/>
 1. Press setting icon
 2. Enter the company information.
+3. Check company's information.
+4. If you press the 'GET INFO !', you can receive visitors' information.
 
 ## License
 
@@ -50,4 +53,11 @@ It is based on Euphony library.
 Official Facebook Page : https://www.facebook.com/euphonyproject
 
 Official Library Site : https://dev.jbear.co/euphony
+
+## What's next ?
+
+- On the user information setting screen, phone verification will be added !
+
+
+
 
