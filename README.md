@@ -33,6 +33,10 @@ But, This application has no such inconvenience as using sound wave communicatio
 1. Press setting icon
 2. Enter the company information.
 
+## License
+
+soundless-check-in is licensed under the Apache 2.0 license. See the [LICENSE](https://github.com/euphony-io/soundless-check-in/blob/master/LICENSE) file for details.
+
 ## Report Issues
 
 To report a specific problem or feature request, [please open a new issue](https://github.com/euphony-io/soundless-check-in/issues/new/choose). 
