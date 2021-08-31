@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,11 +23,13 @@ import euphony.lib.transmitter.EuTxManager;
 public class SpeakerFragment extends Fragment implements View.OnClickListener {
 
     private boolean speak = false;
+    private CustomToast toast;
     // Variables of UI component
     private TextView tvNumber;
     private TextView tvCity;
     private Button btnCheckIn;
     private Button btnSetting;
+
     //
     private String data;        // data that gonna be sent.
     private String phoneNumber;
@@ -39,6 +40,7 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_speaker, container,false);
         setUI(v);
+        toast = new CustomToast(this.getContext());
         return v;
     }
 
@@ -62,13 +64,14 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
         // necessary information
         phoneNumber = EncryptedSPManager.getString(this.getActivity(), "phone");
         livingCity = EncryptedSPManager.getString(this.getActivity(), "city");
+        String UserLoc = EncryptedSPManager.getString(requireContext(), "userCity") + " " + EncryptedSPManager.getString(requireContext(), "userTown");
 
         data = phoneNumber+"/"+livingCity;
         // Data format : 010-xxxx-xxxx/City(English)
         // ex) 010-1234-1234/Seoul
 
         tvNumber.setText(phoneNumber);
-        tvCity.setText(livingCity);
+        tvCity.setText(UserLoc);
     }
 
     @Override
@@ -76,11 +79,11 @@ public class SpeakerFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btnCheckIn :
                 if (speak) {
-                    Toast.makeText(getActivity(), "Stop", Toast.LENGTH_SHORT).show();
+                    toast.showToast("Stop Check-in", Toast.LENGTH_SHORT);
                     mTxManager.stop();
                     speak = false;
                 } else {
-                    Toast.makeText(getActivity(), "Check In !", Toast.LENGTH_SHORT).show();
+                    toast.showToast("Check In !", Toast.LENGTH_SHORT);
                     mTxManager.euInitTransmit(data);
                     mTxManager.process(-1);      // -1 : generate sound infinite
                     speak = true;
