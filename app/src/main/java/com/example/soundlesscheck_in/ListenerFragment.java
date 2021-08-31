@@ -126,7 +126,7 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
     private void setUserInformation(String data){
         String[] userInfo = data.split("/");
 
-        if(userInfo.length == 2) {
+        if(userInfo.length == 3) {
             String currentTime = getTime();
 
             Store store = new Store(
@@ -136,6 +136,9 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
                     EncryptedSPManager.getString(requireContext(), "town")
                     );
 
+            GetCityTownInfo getCityTownInfo = new GetCityTownInfo(this.getContext());
+            String cityInfo = getCityTownInfo.positionToString(Integer.parseInt(userInfo[1]), Integer.parseInt(userInfo[2]));
+
             Visitor visitor = new Visitor(userInfo[0], userInfo[1], store.getTradeName(), currentTime);
 
             updateVisitorInformation(visitor);
@@ -143,7 +146,7 @@ public class ListenerFragment extends Fragment implements View.OnClickListener {
 
             mTextTime.setText(String.format(getString(R.string.check_in_time), currentTime));
             mTextPhoneNumber.setText(String.format(getString(R.string.customer_phone_number), userInfo[0]));
-            mTextViewCity.setText(String.format(getString(R.string.customer_city), userInfo[1]));
+            mTextViewCity.setText(String.format(getString(R.string.customer_city), cityInfo));
 
             toast.showToast("Check-in is complete!", Toast.LENGTH_LONG);
         }else{
