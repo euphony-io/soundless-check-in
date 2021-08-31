@@ -15,6 +15,7 @@ public class EncryptedSPManager {
     private static SharedPreferences prefs;
 
     public static final String DEFAULT_VALUE_STRING = "No Data";
+    public static final int DEFAULT_VALUE_INT = -1;
 
     private static SharedPreferences getPrefs(Context context) {
         try {
@@ -42,9 +43,22 @@ public class EncryptedSPManager {
         editor.commit();
     }
 
+    public static void setInt(Context context, String key, int value) {
+        SharedPreferences prefs = getPrefs(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
+
     public static String getString(Context context, String key) {
         SharedPreferences prefs = getPrefs(context);
         String value = prefs.getString(key, DEFAULT_VALUE_STRING);
+        return value;
+    }
+
+    public static int getInt(Context context, String key) {
+        SharedPreferences prefs = getPrefs(context);
+        int value = prefs.getInt(key, DEFAULT_VALUE_INT);
         return value;
     }
 
