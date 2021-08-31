@@ -1,6 +1,5 @@
 package com.example.soundlesscheck_in;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -12,9 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,27 +37,25 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
 
     private ArrayAdapter<String> arrayAdapter;
 
+    private int mCityPosition;
+    private int mTownPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutorial);
 
         toast = new CustomToast(this);
-      
+
         setUI();
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[])getResources().getStringArray(R.array.spinner_region));
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCity.setAdapter(arrayAdapter);
-
         initAddressSpinner();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(!isFirst) updateEditTextUI();
+        if (!isFirst) updateEditTextUI();
     }
 
     protected void setUI() {
@@ -71,14 +68,17 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         spinnerSigungu = findViewById(R.id.spinner2);
 
         mCity = findViewById(R.id.userCity);
-
         mTown = findViewById(R.id.userTown);
 
         mPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         mGetInfoBtn.setOnClickListener(this);
 
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[]) getResources().getStringArray(R.array.spinner_region));
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCity.setAdapter(arrayAdapter);
+
         isFirst = getIntent().getBooleanExtra("boolean_checkFirst", false);
-        if(!isFirst&&!isBtnMade) addNewButton();
+        if (!isFirst && !isBtnMade) addNewButton();
     }
 
     protected void addNewButton() {
@@ -99,7 +99,7 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     }
 
     protected void updateEditTextUI() {
-        mPhoneNumber.setText(EncryptedSPManager.getString(this,"phone"));
+        mPhoneNumber.setText(EncryptedSPManager.getString(this, "phone"));
     }
 
     @Override
@@ -107,20 +107,15 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.btnGetFirstInfo:
 
-                EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
-                EncryptedSPManager.setString(this, "userCity", mCity.getText().toString());
-                EncryptedSPManager.setString(this, "userTown", mTown.getText().toString());
-                finish();
-                 /*
-                if(mPhoneNumber.getText().toString().equals("")||mLivingCity.getText().toString().equals("")) {
+                if (mCityPosition == 0) {
                     toast.showToast("Fill out the form!", Toast.LENGTH_LONG);
-                }
-                else {
+                } else {
                     EncryptedSPManager.setString(this, "phone", mPhoneNumber.getText().toString());
-                    EncryptedSPManager.setString(this, "city", mLivingCity.getText().toString());
+                    EncryptedSPManager.setString(this, "userCity", mCity.getText().toString());
+                    EncryptedSPManager.setString(this, "userTown", mTown.getText().toString());
+
                     finish();
                 }
-                */
                 break;
             case btnCancel:
                 finish();
@@ -129,13 +124,14 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+
     private void initAddressSpinner() {
         spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mCity.setText(spinnerCity.getSelectedItem().toString());
-
+                mCityPosition = position;
                 switch (position) {
                     case 0:
                         spinnerSigungu.setAdapter(null);
@@ -198,7 +194,6 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -207,10 +202,12 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mTown.setText(spinnerSigungu.getSelectedItem().toString());
+                mTownPosition = position;
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
     }
@@ -221,7 +218,7 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
             arrayAdapter = null;
         }
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[])getResources().getStringArray(array_resource));
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[]) getResources().getStringArray(array_resource));
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSigungu.setAdapter(arrayAdapter);
     }

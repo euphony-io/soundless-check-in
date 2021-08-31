@@ -69,41 +69,41 @@
 
     <TextView
         android:id="@+id/companyCity"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/companyLocTextView"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:textSize="20dp" />
 
     <TextView
         android:id="@+id/companySigungu"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/companyCity"
-        android:layout_marginStart="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/companyCity"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/companyCity"
         android:textSize="20dp" />
 
     <Spinner
         android:id="@+id/spin_city"
-        android:layout_width="300dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/companyCity"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
         android:spinnerMode="dialog" />
 
     <Spinner
         android:id="@+id/spin_sigungu"
-        android:layout_width="300dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spin_city"
-        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@id/spin_city"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="30dp"
         android:spinnerMode="dialog" />
 
 
