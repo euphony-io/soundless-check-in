@@ -17,7 +17,7 @@ The existing 'QR code check-in'  has the following problems.
 * If the surroundings are too bright or too dark, it is not recognized well.
 * The process of accessing QR codes is complicated, especially for the elderly.
 
-But, This application has no such inconvenience as using sound wave communication.
+Because this application is user-friendly and use sound-communication,  there is no inconvenience like above !
 
 ## Run the app
 * ### Visitor
@@ -34,7 +34,7 @@ But, This application has no such inconvenience as using sound wave communicatio
 1. Press setting icon
 2. Enter the company information.
 3. Check company's information.
-4. If you press the 'GET INFO !', you can receive visitors' information.
+4. If you press the 'GET INFO!', this application will be state that can recognize visitor's information.
 
 ## License
 
