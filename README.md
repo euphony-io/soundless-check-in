@@ -4,7 +4,7 @@
 
 This is a check-in application that identifies visitors, especially effective during the COVID-19.
 
-Using this application, you can check in with sound wave communication instead of QR code
+Using this application, you can check in with sound wave communication instead of QR code.
 
 When the check-in is complete, visitor and store information are stored in the database, along with the check-in time. 
 
