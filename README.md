@@ -4,10 +4,9 @@
 
 This is a check-in application that identifies visitors, especially effective during the COVID-19.
 
-This application stores below informations in database
-> Visitor's phone number  
-> Visitor's residential area  
-> Information of company that they visit  
+Using this application, you can check in with sound wave communication instead of QR code
+
+When the check-in is complete, visitor and store information are stored in the database, along with the check-in time. 
 
 ## Reason for making this application
 
